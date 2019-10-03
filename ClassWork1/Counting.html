@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
     <link rel="icon" href="https://maeyler.github.io/favicon.ico">
-    <title>xxx </title>
+    <title>Counting </title>
 
   <style> /* CSS comment */
     body { max-width: 440px; }
     #inp { width: 50px }
     #out {
         font-size: 18px;
-        background: blue;
+        background: red;
         color: white;
         text-align: center;
         padding: 10px;
@@ -22,16 +22,21 @@
 <body>   <!-- HTML comment: Modify all items marked xxx -->
 
 <h2 id=title>This text is not shown. Why?</h2>
-xxx 
+Sayı 
 <input type=number id=inp value=0 onChange="out.innerText=value">
 &emsp;
-<input type=button value=xxx onClick="increment()">
+<input type=button value=Arttır onClick="increment()">
+<input type=button value='Double Arttır' onClick="doubleArttır()">
+<input type=button value=Azalt onClick="decrement()">
+<input type=button value='Double Azalt'  onClick="doubleAzalt()">
 <p id=out>This text is not shown. Why?</p>
 
 <hr />
 <b>Sample code</b>
-<pre id=sample>This text is not shown. Why?</pre>
-
+<pre id=sample></pre>
+<pre id=sample2></pre>
+<pre id=sample3></pre>
+<pre id=sample4></pre>
 <hr />
 <p>Ref: <a href="https://www.w3schools.com/js/" 
    target="NewTab">JS Tutorial</a>
@@ -45,10 +50,28 @@ function increment() {
     console.log("counter = "+c);
     out.innerText = c;
 }
+function doubleArttır() {
+    let c = Number(out.innerText)+2
+    console.log("counter = "+c);
+    out.innerText = c;
+}
+function decrement() {
+    let c = Number(out.innerText)-1
+    console.log("counter = "+c);
+    out.innerText = c;
+}
+function doubleAzalt() {
+    let c = Number(out.innerText)-2
+    console.log("counter = "+c);
+    out.innerText = c;
+}
     //global variable id is the HTML element with id 
     //const title = document.getElementById("title");
     title.innerText = document.title;
     sample.innerText = increment.toString();
+	sample2.innerText = doubleArttır.toString();
+	sample3.innerText = decrement.toString();
+	sample4.innerText = doubleAzalt.toString();
     out.innerText = 0; increment();
 </script>
 
