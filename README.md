@@ -9,5 +9,7 @@
 
 [Temperature Conversion](https://itssamedozkan.github.io/JSProjects/ClassWork2/Fahrenait.html): Class work 2. kısım
 
-## HomeWork1
-[Poisson Table](https://itssamedozkan.github.io/JSProjects/HomeWorks/poissonTable.html): Poisson Distribution Table
+## ClassWork3
+![Pie Chart and Triangle](https://itssamedozkan.github.io/JSProjects/ClassWork3/ClassWork3.png): Sincap ClassWork
+
+
