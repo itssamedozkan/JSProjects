@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="icon" href="../images/icon192.png">
+    <title>Courses </title>
+
+  <style>
+    .link {
+        color: blue;
+        cursor: pointer;
+        font-style: italic;
+    }
+    .course {
+        visibility: hidden;
+        font: 10px arial, sans-serif;
+        color: white;
+        background: blue;
+        cursor: text;
+        padding: 6px;
+        position: absolute;
+        height: 90px;
+        overflow-y: auto;
+    }
+    .link:hover .course { 
+        visibility: visible; 
+    }
+  </style>
+</head>
+
+<body>
+
+<h2 id=title></h2>
+
+<p>Course code: 
+<input type=text onchange="findCourse(value.trim())" value="ADP 101">
+</p>
+
+<pre id=cTxt></pre>
+<hr />
+<b>Sample code</b>
+<pre id=sample></pre>
+<hr />
+
+<script>
+
+
+var Tclasses = [];
+
+class Course{
+	constructor(name,hour, date , classes ){
+	this.name = name;
+	this.hour = hour;
+	this.date = date;
+	this.classes = classes
+	
+	}
+	toString(){
+	return this.date + '\n'+ this.hour + '\n' + this.classes
+	}
+
+}
+
+function readData(file) {
+    console.log("readData "+file);
+    fetch(file)
+        .then(r => r.text())
+        .then(addCourses);
+}
+function addCourses(txt) {
+    
+    let a = txt.split("\n");
+    
+    for (let s of a) {
+      let course = parseCourses(s);
+      
+    }
+    
+}
+function parseCourses(line) {
+    let [name, hour, day, ...clases] = line.split("\t");
+  
+	Tclasses.push(new Course(name,hour,day,clases))
+    
+}
+
+function findCourse(val){
+code = (val.toUpperCase()).trim();
+for( let c of Tclasses){
+	if(c.name == code){
+	cTxt.innerText = c.toString();
+	return c
+	}
+	}
+}
+
+   readData("https://maeyler.github.io/JS/data/Courses.txt")
+   title.innerText = document.title;
+  sample.innerText = parseCourses +  ' \n '  + addCourses + '\n' +findCourse + '\n' + readData
+  
+  findCourse("ADP 101     ")
+</script>
+
+</body>
+</html>
