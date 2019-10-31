@@ -13,3 +13,7 @@
 
 ## ClassWork4
 [Courses](https://itssamedozkan.github.io/JSProjects/ClassWork4/Courses.html): Class work 4 Courses
+
+
+## ClassWork5
+[Inspector](https://itssamedozkan.github.io/JSProjects/ClassWork5/work/EloquentJS.html): Class Work 5 Inspector
