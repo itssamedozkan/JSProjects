@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link href="https://maeyler.github.io/JS/sss/inspector.css" 
+          rel="stylesheet" media="all">
+    <link rel="icon" href="../images/icon192.png">
+    <script src="https://maeyler.github.io/JS/sss/inspector.js"></script>
+    <script src="c4_data.js"></script>
+    <script src="c6_object.js"></script>
+    <script src="../exam/Quiz.js"></script>
+    <script src="Async.js"></script>
+	<script src="Database.js"></script>
+    <title>Eloquent JavaScript </title>
+</head>
+
+<body>
+<p><b id=docName></b> &nbsp;
+<a href="https://maeyler.github.io/JS/sss/">Read me</a> &nbsp;
+<a href="https://maeyler.github.io/JS/sss/Turkish">Turkish</a>
+</p>
+<div id=sss></div>
+<pre id=disp1></pre>
+<img id=disp2 />
+
+<script>
+"use strict";
+var a, b, c, code;  //global variables
+function init() {
+    let len = 123, name = "Circle", pi = Math.PI;
+    a = [0, 11, "22", "abc"];
+    c = {len, name, pi};
+    display(new Chap4());
+    display(new Chap6());
+    display(new Quiz());
+	display(new Async()); //global
+	
+	MENU = new CW5();
+
+    display(MENU); 
+}
+    docName.innerText = "Inspector "+VERSION;
+    try {
+        inspect(sss, init); //makes the table
+        inp.value = "new Date()";
+    } catch(e) {
+        reportError(e);
+    }
+</script>
+<h1> Class Work</h1>
+1-<a href="https://itssamedozkan.github.io/JSProjects/">Bütün Projeler</a>
+<br>
+2- <a href="https://itssamedozkan.github.io/JSProjects/ClassWork2/Counting.html">ClassWork2/Counting</a>
+<br>
+3-<a href="https://itssamedozkan.github.io/JSProjects/ClassWork2/Fahrenait.html">ClassWork2/Fahrenait</a>
+<br>
+4- <a href="https://itssamedozkan.github.io/JSProjects/ClassWork4/Courses.html">ClassWork4/Courses</a>
+
+</body>
+</html>
