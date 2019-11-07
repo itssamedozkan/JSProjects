@@ -17,3 +17,9 @@
 
 ## ClassWork5
 [Inspector](https://itssamedozkan.github.io/JSProjects/ClassWork5/work/EloquentJS.html): Class Work 5 Inspector
+
+## ClassWork6
+[FileOperation](https://itssamedozkan.github.io/JSProjects/ClassWork6/FileOperation.html): Class Work 6 File Operations
+
+## HomeWork1
+[HomeWork1](https://itssamedozkan.github.io/JSProjects/HomeWorks/poissonTable.html): HomeWork1 PoissonTable 

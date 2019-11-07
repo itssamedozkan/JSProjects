@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="icon" href="https://maeyler.github.io/favicon.ico">
+    <title>File Operations </title>
+
+  <style> /* CSS comment */
+    body { max-width: 440px; }
+    #inp { width: 50px }
+    #out {
+        font-size: 18px;
+        background: blue;
+        color: white;
+        text-align: center;
+        padding: 10px;
+    }
+  </style>
+</head>
+
+<body>   <!-- HTML comment: Modify all items marked xxx -->
+
+
+Remote File : <input  type=string id=inp value="" onChange="readData(value)">
+<br>
+<br>
+<input type="file" multiple onchange="fileSelect(this)">
+<br>
+Okunan dosyalar : <pre id=FileNames></pre>
+Result : <pre id=Result></pre>
+<hr/>
+<b>Sample code</b>
+<pre id=sample></pre>
+
+
+
+
+
+
+<script>
+"use strict";
+let data = ""
+
+function readData(url){
+fetch(url).then(r => r.text()).then(b =>saveData(b))
+}
+function saveData(d){
+data = d
+
+}
+
+
+
+let a ;
+const RDR2 = new FileReader();
+RDR2.onload = function() { console.log(RDR2) };
+function fileSelect(t) { 
+//target t is the file selection HTMLInputElement
+    FileNames.innerText = "";
+	a = t.files; //console.log(t);
+    if (a.length == 0) return;
+    
+    if (a.length == 1) {
+        let f = a[0]; FileNames.innerText = f.name;
+       
+    } else {
+       
+        
+        
+		for (let f of a) 
+		
+            FileNames.innerText += f.name+" "+f.size+" bytes " + " , ";
+       
+	   
+    }
+	
+	compare(a)
+	
+}
+
+let yazi ;
+let counter = 0 
+async function saveData2(d){
+yazi = d
+
+if(yazi == data){
+counter++
+			}
+
+if (counter > 0)
+Result.innerText = a.length + " files has been check  "+counter+ "is same";
+else 
+Result.innerText = a.length + " files has been check  none is same";
+
+
+}
+
+let yazilar;
+function compare(files){
+console.log("compare")
+for (let file of files){
+
+ let RDR = new FileReader();
+ RDR.onloadend = function() { saveData2(RDR.result) };
+	RDR.readAsText(file)
+	
+	
+}
+	
+
+
+}
+
+sample.innerText = compare + "\n" +saveData2 + "\n" + saveData +"\n" + readData
+
+
+</script>
+
+</body>
+</html>
