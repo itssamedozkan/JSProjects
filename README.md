@@ -21,5 +21,8 @@
 ## ClassWork6
 [FileOperation](https://itssamedozkan.github.io/JSProjects/ClassWork6/FileOperation.html): Class Work 6 File Operations
 
+## ClassWork7
+[Timing ](https://itssamedozkan.github.io/JSProjects/ClassWork7/Cw7.html): Class Work 7 Timing
+
 ## HomeWork1
 [HomeWork1](https://itssamedozkan.github.io/JSProjects/HomeWorks/poissonTable.html): HomeWork1 PoissonTable 

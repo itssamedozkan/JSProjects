@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<!-- saved from url=(0041)https://maeyler.github.io/305/work/Timing -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta name="viewport" content="width=device-width">
+    <link rel="icon" href="https://maeyler.github.io/305/images/icon192.png">
+    <script src="./Clock 13_07_files/Database.js"></script>
+    <title>ClassWork7</title>
+
+  <style>
+    body { max-width: 450px; }
+  </style>
+
+</head>
+
+<body>
+<h2>Time Measurement</h2>
+<button onclick="timing(searchArray),timing(searchMap)">Compare Times</button>
+
+<hr>
+
+<p id="out"></p>
+
+
+<h3>Sample code</h3>
+<hr>
+<pre id="sample"></pre>
+<hr>
+
+
+<script>
+"use strict";
+// Make a large Set
+const url = "https://maeyler.github.io/JS/data/"
+const array = []     // Student objects
+const map = new Map();
+const set = new Set() // distinct names
+function readData(file) {
+    console.log("readData "+file)
+    fetch(url+file)
+        .then(r => r.text())
+        .then(addStudents)
+        .catch(console.error)
+}
+function parseStudent(line) {
+    let [id, name, gpa, ...L] = line.split('\t')
+    let std = new Student(id, name, gpa)
+    std.courses = L; return std
+}
+function addStudents(txt) {
+    let msg = "<br>Data contains "
+         + txt.length+" chars, "
+    let a = txt.split('\n')
+    msg += a.length+" lines <br>"
+    for (let s of a) {
+      let std = parseStudent(s)
+      array.push(std.id); map.set(std.id,std)
+    }
+    msg += array.length+" students, "
+    msg += set.size+" distinct names \n"
+    out.innerHTML += msg
+}
+
+const tcount = 10000;
+
+function searchArray(){
+let founcount = 0;
+let randomStart = 116701701
+
+for(let i = 0; i < tcount ; i++){
+  if (array.includes(randomStart+"")) {
+    founcount++;
+  }
+  randomStart++;
+
+}
+
+return founcount
+
+
+
+}
+
+function searchMap(){
+  let founcount = 0;
+  let randomStart = 116701701
+
+  for(let i = 0; i < tcount ; i++){
+    if (map.has(randomStart+"")) {
+      founcount++;
+    }
+    randomStart++;
+
+  }
+  return founcount
+
+}
+
+
+
+
+// Set Intersection & timing
+
+function timing(f) {
+    let t = performance.now() //more accurate than Date.now()
+    let x = f()   //calculate intersection by itself
+    t = performance.now() - t
+    let s = f.name+": "+t.toPrecision(3)+" msec -- found count:"+ x
+    out.innerHTML += "<br>"+s; console.log(s)
+
+
+}
+    //title.innerText = document.title;
+
+    sample.innerText = searchMap + " \n" + searchArray;
+    readData("Students.txt")
+
+</script>
+
+
+
+</body></html>
