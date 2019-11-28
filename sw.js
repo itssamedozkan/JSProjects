@@ -1,5 +1,6 @@
 const CACHE ='JS_Class'
-const FILES = ['/JS/CW1.png', '/JS/CountDown.html', '/JS/C2FConverter.html', '/JS/CW3.png', '/JS/CW%234.html','/JS/CH5/EloquentJS.html','/JS/cw6.html','/JS/CW7/Timing.html']
+const FILES = ['/JSProjects/ClassWork1/ClassWork1.png', '/JSProjects/ClassWork2/Counting.html', '/JSProjects/ClassWork2/Fahrenait.html', '/JSProjects/ClassWork3/ClassWork3.png', '/JSProjects/ClassWork4/Courses.html','/JSProjects/ClassWork5/work/EloquentJS.html','/JSProjects/ClassWork6/FileOperation.html','/JSProjects/ClassWork7/Cw7.html'
+'/JSProjects/cw8/classWork8.html']
 
 function installCB(e) {
   e.waitUntil(
