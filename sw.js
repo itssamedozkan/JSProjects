@@ -1,34 +1,29 @@
-const CACHE ='AP'
+const CACHE ='JS_Class'
+const FILES = ['/JS/CW1.png', '/JS/CountDown.html', '/JS/C2FConverter.html', '/JS/CW3.png', '/JS/CW%234.html','/JS/CH5/EloquentJS.html','/JS/cw6.html','/JS/CW7/Timing.html']
+
 function installCB(e) {
-  console.log(CACHE, e);
+  e.waitUntil(
+    caches.open(CACHE)
+    .then(cache => cache.addAll(FILES))
+    .catch(console.log)
+  )
 }
-addEventListener('install', installCB)
+self.addEventListener('install', installCB)
 
 function save(req, resp) {
-  if (!req.url.includes("github")) 
-     return resp;
   return caches.open(CACHE)
-  .then(cache => { // save request
+  .then(cache => {
     cache.put(req, resp.clone());
     return resp;
-  }) 
-  .catch(console.err)
-}
-function report(req) {
-  console.log(CACHE+' matches '+req.url)
-  return req
+  })
+  .catch(console.log)
 }
 function fetchCB(e) { //fetch first
   let req = e.request
+  console.log('JS_Class', req.url);
   e.respondWith(
     fetch(req).then(r2 => save(req, r2))
-    .catch(() => caches.match(req).then(report))
+    .catch(() => { return caches.match(req).then(r1 => r1) })
   )
 }
-addEventListener('fetch', fetchCB)
-
-function activateCB(e) {
-  console.log(CACHE, e);
-}
-addEventListener('activate', activateCB);
-
+self.addEventListener('fetch', fetchCB)
