@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta name="viewport" content="width=device-width">
+    <link rel="icon" sizes="192x192" href="https://maeyler.github.io/JS/images/JS.png">
+    <title>Make a Table </title>
+
+  <style>
+    body { max-width: 440px; }
+    #sample { overflow-x: auto; }
+    table { border-collapse: collapse; }
+    th { color: blue; padding: 5px 5px; }
+    td {
+        border: 1px solid blue;
+        padding: 5px 5px;
+        text-align: center;
+        position: relative;
+    }
+    td:hover .tip {
+        visibility: visible;
+    }
+    td .tip {
+        visibility: hidden;
+        font-size: small;
+        background-color: blue;
+        color: white;
+        text-align: center;
+        padding: 5px 5px;
+        position: absolute;
+        left: 5px;
+        top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+<center>
+<h2 id="title">Make a Table</h2>
+
+URL : <input type="string" id="inp" value="" onchange="readData(value)">
+
+<input type="file" multiple="" onchange="fileSelect(this)">
+
+<p id="txts" style="font-size:small"></p>
+
+<table id="tablo"></table>
+
+<p id="out" style="font-size:small"></p>
+
+</center>
+
+<hr>
+<b>Sample code</b>
+<pre id="sample">function makeRows(m, n) {<br>    let row = "&lt;th&gt;&lt;/th&gt;";<br>    for (let j = 1; j &lt;= n; j++) <br>        row += "&lt;th&gt;"+j+"&lt;/th&gt;";<br>    let text = "&lt;tr&gt;"+row+"&lt;/tr&gt;";<br>    for (let i = 1; i &lt;= m; i++) {<br>       row = "&lt;th&gt;"+i+"&lt;/th&gt;";<br>       for (let j = 1; j &lt;= n; j++) {<br>          let p = n*(i-1)+j;<br>          let s = "&lt;span class=tip&gt;C"+p+"&lt;/span&gt;"<br>          row += "&lt;td&gt;"+i+","+j+s+"&lt;/td&gt;";<br>       }<br>       text += "&lt;tr&gt;"+row+"&lt;/tr&gt;";<br>    }<br>    let t = text.length+" chars";<br>    console.log("makeRows: "+m+"x"+n+" "+t);<br>    tablo.innerHTML = text; out.innerText = t; <br>}</pre>
+
+
+<hr>
+
+<script>
+"use strict";
+let  tabloTxt;
+let dos;
+let keys = [];
+let tabloObject;
+
+
+function readData(url){
+fetch(url).then(r => r.text()).then(b =>saveData(b))
+}
+
+function saveData(d){
+tabloTxt = d
+}
+
+
+let a ;
+const RDR2 = new FileReader();
+
+RDR2.onload = function() { console.log(RDR2) };
+
+function fileSelect(t) {
+
+
+	a = t.files;
+    if (a.length == 0) return;
+    if (a.length == 1){let f = a[0]; }
+    else {
+
+    }
+
+	getText(a)
+}
+
+
+
+function writeMe(txt){
+  tabloTxt = txt.split('\n')
+  dos = toList(txt)
+  tabloObject = JSON.stringify(dos,undefined,2)
+
+  txts.innerText = tabloObject
+
+  makeRows(tabloTxt.length,tabloTxt[0].split('\t').length)
+
+}
+
+function toList(str) {
+  function toObject(x) {
+    let b = {}
+    for (let [i,s] of x.split('\t').entries())
+      b[keys[i]] = (isNaN(s)? s : Number(s))
+    return b
+  }
+    let [d0, ...data] = str.split('\n')
+    keys = d0.split('\t')
+    console.log("Keys:", keys)
+    return data.map(toObject)
+}
+
+
+
+function getText(files){
+  console.log("compare")
+  for (let file of files){
+
+   let RDR = new FileReader();
+   RDR.onloadend = function() { writeMe(RDR.result)  };
+  	RDR.readAsText(file)
+  }
+
+
+}
+
+
+
+function makeRows(m, n) {
+    let row = "<th></th>";
+    for (let j = 0; j < n; j++)
+        row += "<th>"+keys[j]+"</th>";
+    let text = "<tr>"+row+"</tr>";
+    for (let i = 0; i < m-2; i++) {
+       row = "<th>"+i+"</th>";
+          let s = "<span class=tip>C"+i+"</span>"
+          row += "<td>"+dos[i].Name+"</td>";
+          row += "<td>"+dos[i].Diam+"</td>";
+          row += "<td>"+dos[i].Mass+"</td>";
+          row += "<td>"+dos[i].Radius+"</td>";
+          row += "<td>"+dos[i].Period +"</td>";
+       text += "<tr>"+row+"</tr>";
+    }
+    let t = text.length+" chars";
+    console.log("makeRows: "+m+"x"+n+" "+t);
+    tablo.innerHTML = text; out.innerText = t;
+}
+    title.innerText = document.title;
+    sample.innerText = makeRows.toString();
+
+</script>
+
+
+
+</body></html>
