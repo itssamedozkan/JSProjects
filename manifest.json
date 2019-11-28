@@ -1,8 +1,8 @@
 {
-    "name": "M. Yusuf KAYA",
+    "name": "İsmail Taha Samed Özkan",
     "description": "Advanced Programming Classwork",
-    "short_name": "JS",
-    "start_url": "/JS/index.html",
+    "short_name": "JSProjects",
+    "start_url": "/JSProjects/index.html",
     "display": "standalone",
     "background_color": "white",
     "theme_color": "#457cdb",
