@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="icon" sizes="192x192" href="https://maeyler.github.io/JS/images/JS.png">
+    <title>GitHub Users</title>
+
+  <style>
+    body {
+        max-width: 440px;
+    }
+    img {
+        border = "5px";
+        width: 300px;
+    }
+  </style>
+</head>
+
+<body>
+
+<h2 id=title></h2>
+<input type=text id=usr value=maeyler onChange="readUser()">
+<p id=image></p>
+<br/>
+<p id=out></p>
+<hr />
+<b>Sample code</b>
+<pre id=sample></pre>
+<hr />
+<p>Ref: <a href="https://developer.github.com/v3/#rate-limiting" 
+   target=NewTab>GitHub Developer</a>
+</p>
+
+
+
+
+<script>
+//foto = avatar_url
+//name = name
+//nickname = login
+//company = company
+//location = location
+//email 
+//blog = blog
+
+
+"use strict";
+const NL = "\n", BR = "<BR>", 
+    URL = "https://api.github.com/users/"
+function error(t) {
+    out.style.color = 'red'
+    out.innerText = t; console.log(t)
+}
+function listRepos(b) {
+    if (b.length){
+		let s="";
+		if (b.private)
+			s="private"
+		else
+			s="public"
+	out.innerHTML += 
+        b.map(x => x.name  + " --- {Repo Durumu : "+ s + "  , Fork Sayısı :" + x.forks + " } ").join("<br>")
+	  }
+}
+
+function userData(u) {
+    if (!u || !u.login) {
+      error(usr.value+' not found')
+      return
+    } 
+    //u.login is the same as usr.value
+    out.style.color = ''
+    out.innerHTML = ''
+    //start with a tiny image
+	image.innerHTML = ''
+   let img = document.createElement("img");
+img.src = u.avatar_url;
+let src = document.getElementById("image");
+src.appendChild(img);
+    //add name and location
+    let s = (u.name? u.name : u.login)
+	s += BR;
+	//login Nickname
+    s += u.login + BR;
+    out.innerHTML += s+BR; console.log(s)
+	
+    //add link to GitHub 
+    let h = "github.com/"+u.login
+    let a = document.createElement("a")
+    a.href = "https://"+h
+    a.target = "NewTab"
+    a.innerText = h
+    out.appendChild(a)
+    //add repo count
+    let p = u.public_repos+" repos"
+    out.innerHTML += BR+p+BR+BR
+    fetch(URL+u.login+"/repos")
+      .then(r => r.json()) 
+      .then(listRepos).catch(error)
+}
+function readUser() {
+    fetch(URL+usr.value)
+      .then(r => r.ok? r.json() : null) 
+      .then(userData).catch(error)
+}
+
+
+    title.innerText = document.title
+    sample.innerText =  
+       listRepos
+    out.innerText = "Reading data"
+    readUser()
+</script>
+
+</body>
+</html>
