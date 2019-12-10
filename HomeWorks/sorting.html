@@ -1,0 +1,95 @@
+<html>
+  <head>
+    <title>sorting.js</title>
+    <script src='sorting.js'></script>
+    <style>
+      .compare { 
+        font-weight: bold;
+        color: #00F;
+      }
+      .swap {
+        font-weight: bold;
+        color: #F00;
+      }
+    </style>
+  </head>
+  <body>
+             <div class='form-group'>
+            <label for='#algo-select'>Algorithm</label>
+            <select class='form-control' id='algo-select'>
+              <option value='bubblesort'>Bubble sort</option>
+              <option value='selectionsort'>Selection sort</option>
+              <option value='insertionsort'>Insertion sort</option>
+              <option value='odd_even_sort'>Odd-even sort</option>
+              <option value='cocktail_sort'>Cocktail sort</option>
+              <option value='quicksort'>Quicksort</option>
+              <option value='heapsort'>Heapsort</option>
+              <option value='mergesort'>Merge sort</option>
+              <option value='bitonic_mergesort'>Bitonic mergesort</option>
+              <option value='introsort'>Introsort</option>
+            </select>
+          </div>
+          <div class='text-center'>
+            <button class='btn btn-lg btn-primary' id='start-btn' onclick = "clicked()">Start</button>
+          </div>
+        </div>
+        <div class='col-xs-9' id='canvas-div'>
+          <canvas width="800px" height="600px" id="main-canvas">
+        </div>
+      </div>
+    </div>
+
+    <script>
+function shuffle(array) {
+  var m = array.length, t, i;
+
+  // While there remain elements to shuffle…
+  while (m) {
+
+    // Pick a remaining element…
+    i = Math.floor(Math.random() * m--);
+
+    // And swap it with the current element.
+    t = array[m];
+    array[m] = array[i];
+    array[i] = t;
+  }
+
+  return array;
+}
+		var aa = null;
+
+        var canvas = document.getElementById('main-canvas');
+
+        function clicked() {
+          if (aa !== null) aa.cancel();
+
+          var n = 50
+          var interval = 2;
+          var algo = document.getElementById('algo-select').value;
+          var pivot_type = false;
+          var sort_fn = sorting.get_sort_fn(algo, pivot_type);
+
+
+
+          var ary = [];
+          for (var i = 3; i < 100; i++) {
+            ary.push(i);
+          }
+		
+		  ary = shuffle(ary);
+
+          var init = 'random'
+          if (init === 'sorted') {
+            ary.sort(function(a, b) { return a - b; });
+          } else if (init === 'reversed') {
+            ary.sort(function(a, b) {return b - a; });
+          }
+
+          aa = new sorting.AnimatedArray(ary, canvas, interval);
+          sort_fn(aa);
+        }
+      
+    </script>
+  </body>
+</html>
