@@ -37,7 +37,7 @@
 <center>
 <h2 id="title">Make a Table</h2>
 
-URL : <input type="string" id="inp" value="" onchange="readData(value)">
+URL : <input type="string" id="inp" value="https://raw.githubusercontent.com/itssamedozkan/JSProjects/master/cw8/inp" onchange="readData(value)">
 
 <input type="file" multiple="" onchange="fileSelect(this)">
 
@@ -70,6 +70,7 @@ fetch(url).then(r => r.text()).then(b =>saveData(b))
 
 function saveData(d){
 tabloTxt = d
+writeMe(tabloTxt)
 }
 
 
@@ -154,7 +155,7 @@ function makeRows(m, n) {
 }
     title.innerText = document.title;
     sample.innerText = makeRows.toString();
-
+    readData("https://raw.githubusercontent.com/itssamedozkan/JSProjects/master/cw8/inp");
 </script>
 
 
