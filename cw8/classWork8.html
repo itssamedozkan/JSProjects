@@ -38,10 +38,13 @@
 <h2 id="title">Make a Table</h2>
 
 URL : <input type="string" id="inp" value="https://raw.githubusercontent.com/itssamedozkan/JSProjects/master/cw8/inp" onchange="readData(value)">
-
+<br/>
+<b>Dosya olarak Repoda Bulunan inp dosyası da verilebilir.</b>
+<br/>
+<a href="https://raw.githubusercontent.com/itssamedozkan/JSProjects/master/cw8/inp">İnp Dosyası<a/>
+<br/>
 <input type="file" multiple="" onchange="fileSelect(this)">
 
-<p id="txts" style="font-size:small"></p>
 
 <table id="tablo"></table>
 
@@ -99,8 +102,6 @@ function writeMe(txt){
   dos = toList(txt)
   tabloObject = JSON.stringify(dos,undefined,2)
 
-  txts.innerText = tabloObject
-
   makeRows(tabloTxt.length,tabloTxt[0].split('\t').length)
 
 }
@@ -149,9 +150,9 @@ function makeRows(m, n) {
           row += "<td>"+dos[i].Period +"</td>";
        text += "<tr>"+row+"</tr>";
     }
-    let t = text.length+" chars";
-    console.log("makeRows: "+m+"x"+n+" "+t);
-    tablo.innerHTML = text; out.innerText = t;
+   
+    console.log("makeRows: "+m+"x"+n);
+    tablo.innerHTML = text; 
 }
     title.innerText = document.title;
     sample.innerText = makeRows.toString();
