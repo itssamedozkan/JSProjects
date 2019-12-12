@@ -1,3 +1,14 @@
+/* LIST #2 */
+
+header {
+    height: 120px;
+    display: flex;
+    color: white;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    background-color: #262626;
+}
 body {
     margin: 0 auto;
     font: 15px/19px Arial;
@@ -95,3 +106,101 @@ pre {
     width: 400px;
     margin: 10px auto;
 }
+
+#grad1 {
+    background: red;
+    background: -webkit-linear-gradient(left, orange , yellow, green, cyan, blue, violet);
+    background: -o-linear-gradient(right, orange, yellow, green, cyan, blue, violet);
+    background: -moz-linear-gradient(right, orange, yellow, green, cyan, blue, violet);
+    background: linear-gradient(to right, orange , yellow, green, cyan, blue, violet);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 20vw;
+}
+#list2 ol { font-style:italic; font-family:Georgia, Times, serif; font-size:24px; color:#6D416D;  }
+#list2 ol li {     color: #3a80ba;
+    font-weight: bold;
+    text-decoration: none;}
+#list2 ol li p { padding:8px; font-style:normal; font-family:Arial; font-size:13px; color:#000; border-left: 1px solid #999; }
+#list2 ol li p em { display:block; }
+
+
+
+@import url(https://fonts.googleapis.com/css?family=Pacifico);
+@import url('https://fonts.googleapis.com/css?family=Anton');
+
+h1, h2{
+  text-align:center;
+}
+
+h1{
+  color:rgba(100, 50, 255, .8);
+  font-family: 'Pacifico', cursive;
+  color:#212121;
+}
+
+.rainbow {
+  
+   /* Font options */
+  font-family: 'Pacifico', cursive;
+  text-shadow: 2px 2px 4px #000000;
+  font-size:40px;
+  
+   /* Chrome, Safari, Opera */
+  -webkit-animation: rainbow 5s infinite; 
+  
+  /* Internet Explorer */
+  -ms-animation: rainbow 5s infinite;
+  
+  /* Standar Syntax */
+  animation: rainbow 5s infinite; 
+}
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes rainbow{
+  0%{color: orange;}	
+  10%{color: purple;}	
+	20%{color: red;}
+  30%{color: CadetBlue;}
+	40%{color: yellow;}
+  50%{color: coral;}
+	60%{color: green;}
+  70%{color: cyan;}
+  80%{color: DeepPink;}
+  90%{color: DodgerBlue;}
+	100%{color: orange;}
+}
+
+/* Internet Explorer */
+@-ms-keyframes rainbow{
+   0%{color: orange;}	
+  10%{color: purple;}	
+	20%{color: red;}
+  30%{color: CadetBlue;}
+	40%{color: yellow;}
+  50%{color: coral;}
+	60%{color: green;}
+  70%{color: cyan;}
+  80%{color: DeepPink;}
+  90%{color: DodgerBlue;}
+	100%{color: orange;}
+}
+
+/* Standar Syntax */
+@keyframes rainbow{
+    0%{color: orange;}	
+  10%{color: purple;}	
+	20%{color: red;}
+  30%{color: CadetBlue;}
+	40%{color: yellow;}
+  50%{color: coral;}
+	60%{color: green;}
+  70%{color: cyan;}
+  80%{color: DeepPink;}
+  90%{color: DodgerBlue;}
+	100%{color: orange;}
+}
+
+
+
+
