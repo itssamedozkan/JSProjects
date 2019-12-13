@@ -134,12 +134,32 @@ this._colors.push(fullColorHex(        0,       255,         0));
     this._actions.push(['compare', i, j]);
     return this._ary[i] - this._ary[j];
   }
+  
+   AnimatedArray.prototype.compareValues = function(i, j) {
+    /*
+     * Compare the elements at indices i and j.
+     *
+     * this.compare(i, j) > 0 iff this._ary[i] > this._ary[j].
+     */
+    this._actions.push(['compare', i, j]);
+    return i - j;
+  }
+  
+
 
   AnimatedArray.prototype.lessThan = function(i, j) {
     /*
      * Check whether this._ary[i] is less than this._ary[j].
      */
     return this.compare(i, j) < 0;
+  }
+  
+
+  AnimatedArray.prototype.biggerThan = function(i, j) {
+    /*
+     * Check whether this._ary[i] is bigger Than  this._ary[j].
+     */
+    return this.compare(i, j) > 0;
   }
 
   AnimatedArray.prototype.swap = function(i, j) {
@@ -151,7 +171,26 @@ this._colors.push(fullColorHex(        0,       255,         0));
     this._ary[i] = this._ary[j];
     this._ary[j] = t;
   }
+  
+    AnimatedArray.prototype.swapValue = function(arr,i, j) {
+    /*
+     * Swap this._ary[i] and this._ary[j].
+     */
+    this._actions.push(['swap', i, j]);
+    var t = this._ary[i];
+    this._ary[i] = arr[j];
+    arr[j] = t;
+  }
 
+    AnimatedArray.prototype.indexOf = function(i) {
+    /*
+     * Swap this._ary[i] and this._ary[j].
+     */
+
+    return this._ary.indexOf(i);
+
+  }
+  
   AnimatedArray.prototype._step = function() {
     /*
      * Consumes one step from the action buffer, using it to update
@@ -182,10 +221,15 @@ this._colors.push(fullColorHex(        0,       255,         0));
     draw_array(this._canvas, this._ary_display, this._colors);
     this._colors[i] = currI;
     this._colors[j] = currJ;
+
   }
 
   AnimatedArray.prototype.length = function() {
     return this._ary.length;
+  }
+  
+    AnimatedArray.prototype.get = function(i) {
+    return this._ary[i];
   }
 
 
@@ -404,38 +448,7 @@ this._colors.push(fullColorHex(        0,       255,         0));
       mergesort(aa, mid + 1, right);
     }
 
-    // Merge, building up a permutation. This could probably be prettier.
-    var next_left = left;
-    var next_right = mid + 1;
-    var perm = [];
-    for (var i = left; i <= right; i++) {
-      var choice = null;
-      if (next_left <= mid && next_right <= right) {
-        if (aa.lessThan(next_left, next_right)) {
-          choice = 'L';
-        } else {
-          choice = 'R';
-        }
-      } else if (next_left > mid) {
-        choice = 'R';
-      } else if (next_right > right) {
-        choice = 'L';
-      }
-      if (choice === 'L') {
-        perm.push(next_left - left);
-        next_left++;
-      } else if (choice === 'R') {
-        perm.push(next_right - left);
-        next_right++;
-      } else {
-        throw 'Should not get here'
-      }
-    }
-
-    var swaps = perm_to_swaps(perm);
-    for (var i = 0; i < swaps.length; i++) {
-      aa.swap(swaps[i][0] + left, swaps[i][1] + left);
-    }
+ merge(aa,left,mid,right)
   }
 
   function heapsort(aa, left, right) {
@@ -583,8 +596,41 @@ function fullColorHex(r,g,b) {
 
 
 
+function merge(aa,left,mid,right){
+	
+	// Merge, building up a permutation. This could probably be prettier.
+    var next_left = left;
+    var next_right = mid + 1;
+    var perm = [];
+    for (var i = left; i <= right; i++) {
+      var choice = null;
+      if (next_left <= mid && next_right <= right) {
+        if (aa.lessThan(next_left, next_right)) {
+          choice = 'L';
+        } else {
+          choice = 'R';
+        }
+      } else if (next_left > mid) {
+        choice = 'R';
+      } else if (next_right > right) {
+        choice = 'L';
+      }
+      if (choice === 'L') {
+        perm.push(next_left - left);
+        next_left++;
+      } else if (choice === 'R') {
+        perm.push(next_right - left);
+        next_right++;
+      } else {
+        throw 'Should not get here'
+      }
+    }
 
-
+    var swaps = perm_to_swaps(perm);
+    for (var i = 0; i < swaps.length; i++) {
+      aa.swap(swaps[i][0] + left, swaps[i][1] + left);
+    }
+}
 
 
   
