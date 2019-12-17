@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<!-- saved from url=(0066)https://itssamedozkan.github.io/JSProjects/ClassWork4/Courses.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width">
+    <link rel="icon" href="https://itssamedozkan.github.io/JSProjects/images/icon192.png">
+    <script src="Database.js"></script>
+	<title>Student Database </title>
+
+  <style>
+    .link {
+        color: blue;
+        cursor: pointer;
+        font-style: italic;
+    }
+    .course {
+        visibility: hidden;
+        font: 10px arial, sans-serif;
+        color: white;
+        background: red;
+        cursor: text;
+        padding: 6px;
+        position: absolute;
+        height: 90px;
+		weight: 200px;
+		overflow-y :auto;
+       
+    }
+    .link:hover .course { 
+        visibility: visible; 
+    }
+  </style>
+</head>
+
+<body>
+
+<h2 id="title">Student Database</h2>
+
+<button onClick='randomStudent(data.studentList)'>Random Student </button>
+<br>
+<p>Find Students Above Gpa : 
+<input type="text" onchange="getAboveGPA(value)" value="0.0">
+<br>
+<p>Show Courses of : 
+<input type="text" onchange="showCoursesOf(value.trim())" value="215241824">
+
+<p>Exam Schedule for  : 
+<input type="text" onchange="findExamSchedule(value.trim())" value="ADP 101">
+
+<p>Students that Take That Course : 
+<input type="text" onchange="findStudentsTakeCourse(value.trim())" value="ADP 101">
+</p>
+<p>Course List Of Room: 
+<input type="text" onchange="coursListByRoom(value.trim())" value="BTB02">
+</p>
+
+<p>Above This Gpa: 
+<input id ="a1"type="text" onchange="GpaCourse()" value="3.0"> with course :<input id = "a2" type="text" onchange="GpaCourse()" value="ADP 101">
+</p>
+<p>Student id: 
+<input type="text" onchange="findStudent(value.trim())" value="215241824">
+</p>
+<p>Course code: 
+<input type="text" onchange="findCourseCode(value.trim())" value="ADP 101">
+</p>
+
+<p id=cTxt onClick='doClick(event)'>Result:</p>
+<hr>
+<b>Sample code</b>
+<pre id="sample"></pre>
+<hr>
+
+
+</body></html>
