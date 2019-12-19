@@ -1,0 +1,115 @@
+
+<html>
+ 
+	<style >
+    .box {
+      width: 100px;
+      height: 100px;
+      display:inline-block;
+      background: #000; 
+    }
+    </style>
+
+
+  <body onresize="resizer()">
+	<h1>Hw3 Animation</h1>
+    
+    
+    <div id="boxes">
+     <div>
+       <div class="box"></div>
+        <div class="box"></div>
+		<div class="box"></div>
+        <div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+        <div class="box"></div>
+      </div> 
+      <div>
+		<div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+		<div class="box"></div>
+        <div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+      </div> 
+      <div>
+		<div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+		<div class="box"></div>
+        <div class="box"></div>
+		<div class="box"></div>
+        <div class="box"></div>
+      </div> 
+	  <div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+		<div class="box"></div>
+        <div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+      </div> 
+	   <div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+		<div class="box"></div>
+        <div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+      </div> 
+	  
+	  <h2>İsmail Taha Samed Özkan</h2>
+    </div>
+
+    <script >
+	let box = document.getElementsByClassName("box")
+	
+	const r0 = "rotate(0)"
+    function eventHandler(event) {
+      var element = event.target;
+      if (!element || !element.classList.contains('box'))
+          return;
+      // Random olarak arka plan rengini alma.
+      var color = Math.random() * 360;
+      var target = 'hsl(' + color + ', 100%, 50%)';
+      
+      var keyframes = [
+        { background: '#eee' },
+        { background: target }
+      ];
+	  var rotation = { transform: [r0, "rotate(360deg)", r0] }
+	  
+	  //renk geçiş hızı
+      var options = 300;
+      var animation=element.animate(keyframes, options);
+	  
+	  var animation2=element.animate( rotation, options);
+    };
+    var boxes = document.getElementById('boxes');
+    boxes.addEventListener('mouseover', eventHandler);
+    
+	
+	function resize(w,h) {
+    for (let elements of box){
+	elements.style.width= w/12
+	elements.style.height= h/12
+	}
+	console.log(w,h)
+	}
+	
+	function resizer() {
+  var w = window.outerWidth;
+  var h = window.outerHeight;
+	resize(w,h)
+  }
+  
+	resizer()
+
+    </script>
+    
+  </body>
+</html>
