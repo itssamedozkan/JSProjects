@@ -17,8 +17,8 @@
       }
     </style>
   </head>
-  <body>
-             <div class='form-group'>
+  <body onresize=resize()>
+             <div class='form-group' style = "display:inline-block;">
             <label for='#algo-select'>Algorithm</label>
             <select class='form-control' id='algo-select' onchange = update_pivot_select()>
               <option value='bubblesort'>Bubble sort</option>
@@ -35,7 +35,7 @@
             </select>
           </div>
 		  
-		   <div class='form-group' id='pivot-select-div'>
+		   <div class='form-group' id='pivot-select-div' style = "display:inline-block;" >
             <label for='#pivot-select'>Pivot choice</label>
             <select class='form-control' id='pivot-select'>
               <option value='random'>Random</option>
@@ -49,7 +49,7 @@
 		  
 		  
           <div class='text-center'>
-            <button class='btn btn-lg btn-primary' id='start-btn' onclick = "clicked()">Start</button>
+            <button class='btn btn-lg btn-primary' id='start-btn' onclick = "clicked()" style = "width :100px; height: 40px;">Start</button>
           </div>
         </div>
         <div class='col-xs-9' id='canvas-div'>
@@ -232,9 +232,18 @@ function fullColorHex(r,g,b) {
   return "#"+red+green+blue;
 };
 
-	  
+function resize(){
+var w = window.innerWidth;
+var h = window.innerHeight;
 
+console.log("ekran : "+w + " " + h)
+canvas = document.getElementById("main-canvas")
+canvas.style.width = 2 * Math.round(w / 2) - 20;
+canvas.style.height = 2 * Math.round(h / 2) - 80;
+console.log("canvas : "+ canvas.style.width + "  " + canvas.style.height)
+}
 	  
+resize()
     </script>
   </body>
 </html>
