@@ -20,6 +20,7 @@
   <body onresize=resize()>
              <div class='form-group' style = "display:inline-block;">
             <label for='#algo-select'>Algorithm</label>
+			<br>
             <select class='form-control' id='algo-select' onchange = update_pivot_select()>
               <option value='bubblesort'>Bubble sort</option>
               <option value='selectionsort'>Selection sort</option>
@@ -31,12 +32,12 @@
               <option value='mergesort'>Merge sort</option>
               <option value='bitonic_mergesort'>Bitonic mergesort</option>
               <option value='introsort'>Introsort</option>
-			  <option value='timSort'>Timsort</option>
             </select>
           </div>
 		  
 		   <div class='form-group' id='pivot-select-div' style = "display:inline-block;" >
             <label for='#pivot-select'>Pivot choice</label>
+			<br>
             <select class='form-control' id='pivot-select'>
               <option value='random'>Random</option>
               <option value='first'>First</option>
@@ -46,7 +47,17 @@
             </select>
           </div>
 		  
+		  <div id="arr-div"style = "display:inline-block;">
+		  Element Count: 
+		  <br>
+		  <input id="arrsize" type="Number" name="arrsize" value=100 onchange=start() ><br>
+		  </div>
 		  
+		  <div id="interval-div"style = "display:inline-block;">
+		  interval: 
+		  <br>
+		  <input id="interval" type="Number" name="interval" value = 1 onchange=start()><br>
+		  </div>
 		  
           <div class='text-center'>
             <button class='btn btn-lg btn-primary' id='start-btn' onclick = "clicked()" style = "width :100px; height: 40px;">Start</button>
@@ -59,8 +70,6 @@
     </div>
 
     <script>
-	var n = 100
-	var interval = 1;
 function shuffle(array) {
   var m = array.length, t, i;
 
@@ -87,12 +96,24 @@ function shuffle(array) {
 	else{document.getElementById('pivot-select-div').style.visibility = "hidden";;}
 	}
 
+	
+	function start(){
+	var n = document.getElementById("arrsize").value
+	var interval = document.getElementById("interval").value
+	console.log(n , interval)
+
+
 	update_pivot_select();
 
 	var canvas = document.getElementById('main-canvas');
+	 var ctx = canvas.getContext('2d');
+
+    // Clear the canvas
+    ctx.fillStyle = '#fff';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
 
 var ary = [];
-	for (var i = 0; i < 100; i++) {
+	for (var i = 0; i < n; i++) {
 	ary.push(i);
 	}
 
@@ -110,14 +131,14 @@ colors.push(fullColorHex(        0,       255,         0));
 
 
 draw_array(canvas,ary,colors)
-
+}
 
 
 	function clicked() {
 	if (aa !== null) aa.cancel();
 
-	n = 100
-	interval = 1;
+	var n = document.getElementById("arrsize").value
+	var interval = document.getElementById("interval").value
 	var algo = document.getElementById('algo-select').value;
 	var pivot_type = document.getElementById('pivot-select').value
 	var sort_fn = sorting.get_sort_fn(algo, pivot_type);
@@ -238,12 +259,13 @@ var h = window.innerHeight;
 
 console.log("ekran : "+w + " " + h)
 canvas = document.getElementById("main-canvas")
-canvas.style.width = 2 * Math.round(w / 2) - 20;
-canvas.style.height = 2 * Math.round(h / 2) - 80;
+canvas.style.width = 2 * Math.round(w / 2) - 30;
+canvas.style.height = 2 * Math.round(h / 2) - 100;
 console.log("canvas : "+ canvas.style.width + "  " + canvas.style.height)
 }
 	  
 resize()
+start()
     </script>
   </body>
 </html>
