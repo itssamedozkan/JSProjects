@@ -1,5 +1,6 @@
 <html>
   <head>
+  <link rel="icon" href="icon.png">
     <title>sorting.js</title>
     <script src='sorting.js'></script>
     <style>
@@ -53,11 +54,6 @@
 		  <input id="arrsize" type="Number" name="arrsize" value=100 onchange=start() ><br>
 		  </div>
 		  
-		  <div id="interval-div"style = "display:inline-block;">
-		  interval: 
-		  <br>
-		  <input id="interval" type="Number" name="interval" value = 1 onchange=start()><br>
-		  </div>
 		  
           <div class='text-center'>
             <button class='btn btn-lg btn-primary' id='start-btn' onclick = "clicked()" style = "width :100px; height: 40px;">Start</button>
@@ -99,8 +95,7 @@ function shuffle(array) {
 	
 	function start(){
 	var n = document.getElementById("arrsize").value
-	var interval = document.getElementById("interval").value
-	console.log(n , interval)
+	var interval = 1
 
 
 	update_pivot_select();
@@ -138,7 +133,7 @@ draw_array(canvas,ary,colors)
 	if (aa !== null) aa.cancel();
 
 	var n = document.getElementById("arrsize").value
-	var interval = document.getElementById("interval").value
+	var interval = 1
 	var algo = document.getElementById('algo-select').value;
 	var pivot_type = document.getElementById('pivot-select').value
 	var sort_fn = sorting.get_sort_fn(algo, pivot_type);
@@ -173,7 +168,7 @@ setTimeout(function(){
 
 	aa = new sorting.AnimatedArray(ary, canvas, interval);
 	sort_fn(aa);
-}, 3000);
+}, 1500);
 
 
 
