@@ -252,11 +252,10 @@ function resize(){
 var w = window.innerWidth;
 var h = window.innerHeight;
 
-console.log("ekran : "+w + " " + h)
 canvas = document.getElementById("main-canvas")
 canvas.style.width = 2 * Math.round(w / 2) - 30;
 canvas.style.height = 2 * Math.round(h / 2) - 100;
-console.log("canvas : "+ canvas.style.width + "  " + canvas.style.height)
+
 }
 	  
 resize()
