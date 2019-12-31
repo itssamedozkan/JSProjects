@@ -1,5 +1,22 @@
 /* LIST #2 */
 
+.hero-bkg-animated {
+  background: gray url(https://subtlepatterns.com/patterns/geometry2.png) repeat 0 0;
+  width: 100%;
+  height: 110%;
+  box-sizing: border-box;
+  -webkit-animation: slide 10s linear infinite;
+}
+
+.hero-bkg-animated h1 {
+  font-family: sans-serif;
+}
+
+@-webkit-keyframes slide {
+    from { background-position: 0 0; }
+    to { background-position: -400px 0; }
+}
+
 header {
     height: 120px;
     display: flex;
