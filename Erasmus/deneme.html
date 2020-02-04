@@ -1,0 +1,310 @@
+
+<!-- saved from url=(0056)file:///C:/Users/Samed%20OZKAN/Desktop/poissonTable.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width">
+    <link rel="icon" sizes="192x192" href="https://maeyler.github.io/favicon.ico">
+    <title>Poisson Table </title>
+	<script src='money.js'></script>
+ 
+</head>
+
+<body>
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>New Tab App</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/primitive-ui/dist/css/main.css" />
+  </head>
+
+  <body>
+	<datalist id=flavors>
+		<option value="AUD">
+		<option value="EUR">
+		<option value="BGN">
+		<option value="BRL">
+		<option value="CAD">
+		<option value="CHF">
+		<option value="CNY">
+		<option value="CZK">
+		<option value="DKK">
+		<option value="GBP">
+		<option value="HKD">
+		<option value="HRK">
+		<option value="HUF">
+		<option value="IDR">
+		<option value="ILS">
+		<option value="INR">
+		<option value="ISK">
+		<option value="JPY">
+		<option value="KRW">
+		<option value="MXN">
+		<option value="MYR">
+		<option value="NOK">
+		<option value="NZD">
+		<option value="PHP">
+		<option value="PLN">
+		<option value="RON">
+		<option value="RUB">
+		<option value="SEK">
+		<option value="SGD">
+		<option value="THB">
+		<option value="TRY">
+		<option value="USD">
+		<option value="ZAR">
+	</datalist>
+  
+  
+    <div class="small-container">
+      <h1>New Tab App</h1>
+
+    <form id= 'form1'>
+	<h5> Account Settings</h5>
+    <input id="item" type="text" placeholder="Please Enter Your Account Balance" required />
+	<h6>Please Pick Your Main exchange Type</h6>
+	<select id=menu3 onChange="mainChanged()"></select>
+	</form>
+	
+	<hr>
+	
+	<form id = 'form2'>
+	
+	<h5> Transfer To</h5>
+    <select id=menu4 onChange="transfer()"></select>
+	</form>
+
+	<hr>
+	
+	
+    <form id= 'form3'>
+	<h5>Add Waste </h5>
+	<h6>Please Choose Your Wastes Change Type</h6>
+	<select id=menu5 ></select>
+    <input id="itemDesc" type="text" placeholder="Please Enter The Price "  />
+	<h6>if you want to add Description Write Down Like "Description : value"</h6>
+	</form>
+	
+	<h4> Account Info  	</h4>
+	<pre id = "mexchangeText"> Your current Exchange Balance :  </pre>
+	<pre id = "mtypeTxt"> Your current Exchange Type :  </pre>
+	
+	
+
+	<h4>Items</h4>
+	<ul id = "ul"></ul>
+	
+	<button>Clear All</button>
+    </div>
+  
+  
+    
+
+<script>
+fx.rates.EUR = 0.91
+const form = document.querySelector('#form1')
+const form2 = document.querySelector('#form2')
+const form3 = document.querySelector('#form3')
+
+const ul = document.querySelector('#ul')
+
+const button = document.querySelector('button')
+
+const input = document.getElementById('item')
+const inputDesc = document.getElementById('itemDesc')
+//mType
+const mtypeTxt = document.getElementById('mtypeTxt')
+
+let mTypeArrays = localStorage.getItem('mType') ? JSON.parse(localStorage.getItem('mType')) : []
+
+localStorage.setItem('mType', JSON.stringify(mTypeArrays))
+const data3 = JSON.parse(localStorage.getItem('mType'))
+
+const liMaker3 = text => {
+  
+  mtypeTxt.innerText = 'Your current Exchange Type :'   + text
+  
+}
+
+
+data3.forEach(item => {
+  liMaker3(item)
+})
+//items
+
+
+let itemsArray = localStorage.getItem('items') ? JSON.parse(localStorage.getItem('items')) : []
+
+localStorage.setItem('items', JSON.stringify(itemsArray))
+const data = JSON.parse(localStorage.getItem('items'))
+
+const liMaker = text => {
+  const li = document.createElement('li')
+  li.textContent = text
+  ul.appendChild(li)
+}
+
+
+data.forEach(item => {
+  liMaker(item)
+})
+
+
+//main Exchange
+const mExchangeText = document.getElementById('mexchangeText')
+
+let mExchangeArray = localStorage.getItem('mExchange') ? JSON.parse(localStorage.getItem('mExchange')) : []
+
+localStorage.setItem('mExchange', JSON.stringify(mExchangeArray))
+const data2 = JSON.parse(localStorage.getItem('mExchange'))
+
+const liMaker2 = text => {
+  
+  mExchangeText.innerText = 'Your current Account Balance :'   + text 
+  
+}
+
+
+data2.forEach(item => {
+  liMaker2(item)
+})
+
+
+
+
+button.addEventListener('click', function() {
+  localStorage.clear()
+  while (ul.firstChild ) {
+    ul.removeChild(ul.firstChild)
+	
+  }
+
+})
+
+
+
+
+function mainChanged(){
+
+  mTypeArrays[0] = menu3.value
+  localStorage.setItem('mType', JSON.stringify(mTypeArrays))
+	liMaker3(menu3.value)
+
+  itemsArray.push("You have  set your main Change type to : "+menu3.value)
+  localStorage.setItem('items', JSON.stringify(itemsArray))
+  liMaker("You have  set your main Change type to : "+menu3.value)
+
+}
+
+let demo2 = () => {
+fx.rates.EUR =0.91
+const data3 = JSON.parse(localStorage.getItem('mType'))
+const mchange = JSON.parse(localStorage.getItem('mExchange'))
+
+  
+  // change main cash type
+  mTypeArrays[0] = menu4.value
+  localStorage.setItem('mType', JSON.stringify(mTypeArrays))
+	liMaker3(menu4.value)
+  // change main cash 
+  // change main cash 
+  mExchangeArray[0] = fx(mchange[0]).from(data3[0]).to(menu4.value)
+  localStorage.setItem('mExchange', JSON.stringify(mExchangeArray))
+  liMaker2(fx(mchange[0]).from(data3[0]).to(menu4.value))
+  
+
+itemsArray.push("Your Current Balance after change " +data3[0]+ " to " +menu4.value+ " is " +fx(mchange[0]).from(data3[0]).to(menu4.value))
+  localStorage.setItem('items', JSON.stringify(itemsArray))
+  liMaker("Your Current Balance after change " +data3[0]+ " to " +menu4.value+ " is " +fx(mchange[0]).from(data3[0]).to(menu4.value))
+}
+function transfer(){
+fetch('https://api.exchangeratesapi.io/latest')
+  .then((resp) => resp.json())
+  .then((data) => fx.rates = data.rates)
+  .then(fx.rates.EUR = 0.91 )
+  .then(demo2)
+  }
+
+
+
+
+form.addEventListener('submit', function(e) {
+
+  e.preventDefault()
+
+  mExchangeArray[0] = input.value
+  localStorage.setItem('mExchange', JSON.stringify(mExchangeArray))
+  liMaker2(input.value)
+  
+  
+  itemsArray.push("You have started with  balance : "+input.value)
+  localStorage.setItem('items', JSON.stringify(itemsArray))
+  liMaker("You have started with  balance : "+input.value)
+input.value = ''
+  })
+
+
+form3.addEventListener('submit', function(e) {
+var CutBalance;
+  e.preventDefault()
+  console.log(inputDesc.value.includes(':'))
+  if (inputDesc.value.includes(':')){
+  CutBalance = Number(inputDesc.value.split(':')[1].replace(' ',''))
+  }else{
+  CutBalance = Number(inputDesc.value.replace(' ',''))
+  }
+  console.log("Cut Balance" + CutBalance)
+  console.log(!Number.isNaN(CutBalance ))
+  if(!Number.isNaN(CutBalance )){
+  const data3 = JSON.parse(localStorage.getItem('mType'))
+	if(menu5.value != data3[0] )
+	{
+	// swift cut update 
+	let rate = fx(CutBalance).from(menu5.value).to(data3[0])
+	mExchangeArray[0] = mExchangeArray[0] - rate
+	localStorage.setItem('mExchange', JSON.stringify(mExchangeArray))
+	
+	itemsArray.push("You have Used " + rate + " much " + data3[0] )
+	localStorage.setItem('items', JSON.stringify(itemsArray))
+	liMaker("You have Used " + rate + " much " + data3[0] )
+	inputDesc.value = ''
+	}else{
+	// cut update .
+	let rate = CutBalance
+	mExchangeArray[0] = mExchangeArray[0] - rate
+	localStorage.setItem('mExchange', JSON.stringify(mExchangeArray))
+	
+	itemsArray.push(inputDesc.value)
+	localStorage.setItem('items', JSON.stringify(itemsArray))
+	liMaker(inputDesc.value)
+	inputDesc.value = ''
+  
+	
+	}
+  
+  
+  }
+
+
+}
+
+
+
+
+)
+
+let a = [...flavors.options].map(x => x.value)
+    a.splice(0, 0, '')  //insert '' at a[0]
+    menu3.innerHTML = a.join('<option>')
+	menu4.innerHTML = a.join('<option>')
+	menu5.innerHTML = a.join('<option>')
+</script>
+
+
+
+</body>
+</html>
