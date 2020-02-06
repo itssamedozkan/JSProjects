@@ -78,6 +78,14 @@
 
 	<hr>
 	
+	<form id= 'formBalance'>
+	<h5>Add Balance </h5>
+	<h6>Please Choose Your Adding Balance Type</h6>
+	<select id=menu6 ></select>
+    <input id="bDesc" type="text" placeholder="Please Enter The Balance"  />
+	
+	</form>
+	
 	
     <form id= 'form3'>
 	<h5>Add Waste </h5>
@@ -93,7 +101,7 @@
 	
 	
 
-	<h4>Items</h4>
+	<h4>History</h4>
 	<ul id = "ul"></ul>
 	
 	<button>Clear All</button>
@@ -180,6 +188,8 @@ button.addEventListener('click', function() {
     ul.removeChild(ul.firstChild)
 	
   }
+  liMaker2()
+  liMaker3()
 
 })
 
@@ -295,11 +305,43 @@ var CutBalance;
 
 )
 
+formBalance.addEventListener('submit', function(e) {var CutBalance;
+  e.preventDefault()
+  CutBalance = Number(bDesc.value.replace(' ',''))
+	let rate;
+  const data3 = JSON.parse(localStorage.getItem('mType'))
+	if(menu6.value != data3[0] )
+	{
+	// swift cut update 
+	 rate = fx(CutBalance).from(menu6.value).to(data3[0])
+
+
+	}else{
+	// cut update .
+	 rate = CutBalance
+	
+
+  
+	
+	}
+	mExchangeArray[0] = Number(mExchangeArray[0]) +rate
+  	localStorage.setItem('mExchange', JSON.stringify(mExchangeArray))
+	
+	itemsArray.push("You have added " + rate + " much " + data3[0] )
+	localStorage.setItem('items', JSON.stringify(itemsArray))
+	liMaker("You have added " + rate + " much " + data3[0] )
+	bDesc.value = ''
+	liMaker2( mExchangeArray[0]  )
+  })
+
+
+
 let a = [...flavors.options].map(x => x.value)
     a.splice(0, 0, '')  //insert '' at a[0]
     menu3.innerHTML = a.join('<option>')
 	menu4.innerHTML = a.join('<option>')
 	menu5.innerHTML = a.join('<option>')
+	menu6.innerHTML = a.join('<option>')
 </script>
 
 
