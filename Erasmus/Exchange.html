@@ -327,9 +327,9 @@ formBalance.addEventListener('submit', function(e) {var CutBalance;
 	mExchangeArray[0] = Number(mExchangeArray[0]) +rate
   	localStorage.setItem('mExchange', JSON.stringify(mExchangeArray))
 	
-	itemsArray.push("You have added " + rate + " much " + data3[0] )
+	itemsArray.push("You have added " + rate + " " + data3[0] + " to Your Account")
 	localStorage.setItem('items', JSON.stringify(itemsArray))
-	liMaker("You have added " + rate + " much " + data3[0] )
+	liMaker("You have added " + rate + " " + data3[0] +" to your account" )
 	bDesc.value = ''
 	liMaker2( mExchangeArray[0]  )
   })
