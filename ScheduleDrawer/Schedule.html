@@ -78,40 +78,42 @@ var Lessons =[]
 	this.name = name
 	this.days = [null]
 	this.hours = [null]
+	this.classes=[null]
 	this.oddEven = [null] //even true odd false 
 	Lessons.push(this)
 	console.log(Lessons)
 	}
 	
-	addClass(day,hour,state){
+	addClass(day,hour,state,sınıf){
 	this.days.push(day)
 	this.hours.push(hour)
 	this.oddEven.push(state)
+	this.classes.push(sınıf)
 	}
  }
  
  let russian = new Lesson("Russian Language")
- russian.addClass(days[1],hours[4],true)
- russian.addClass(days[1],hours[4],false)
+ russian.addClass(days[1],hours[4],true,"academic building 11, classroom 726")
+ russian.addClass(days[1],hours[4],false,"academic building 11, classroom 726")
  
- russian.addClass(days[5],hours[3],true)
- russian.addClass(days[5],hours[3],false)
+ russian.addClass(days[5],hours[3],true,"academic building 11, classroom 726")
+ russian.addClass(days[5],hours[3],false,"academic building 11, classroom 726")
  
  
 let info = new Lesson("Information Systems Administration")
-info.addClass(days[3],hours[4],true)
-info.addClass(days[3],hours[4],false)
+info.addClass(days[3],hours[4],true,"11/241 - academic building 11, classroom 241")
+info.addClass(days[3],hours[4],false,"11/241 - academic building 11, classroom 241")
 
-info.addClass(days[4],hours[2],true)
-info.addClass(days[4],hours[2],false)
+info.addClass(days[4],hours[2],true,"L, 11/143 - academic building 11, classroom 143")
+info.addClass(days[4],hours[2],false,"L, 11/143 - academic building 11, classroom 143")
 
 let proj = new Lesson("Project Management")
 
-proj.addClass(days[4],hours[1],false)
+proj.addClass(days[4],hours[1],false,"16/316 - academic building 16, classroom 316")
 
 let knowledge = new Lesson("Knowledge Engineering and Knowledge Management")
-knowledge.addClass(days[4],hours[2],true)
-knowledge.addClass(days[4],hours[2],false)
+knowledge.addClass(days[4],hours[2],true,"16/314 - academic building 16, classroom 314")
+knowledge.addClass(days[4],hours[2],false,"16/310 - academic building 16, classroom 310")
 
 let research = new Lesson("Scientific and Research Work")
 let web = new Lesson ("WEB Service Using and Development")
@@ -134,6 +136,22 @@ for (let ders of Lessons){
 return Str
 }
 
+function getAllRooms(day,hour){
+let Str = ""
+
+for (let ders of Lessons){
+	for (let a = 1 ; a <= ders.days.length; a++){
+
+		if(ders.days[a] == day && ders.hours[a] == hour && ders.oddEven[a] == oddEvenCounter)
+			Str += ders.classes[a] + "<br>"
+	
+	
+	}
+}
+
+return Str
+}
+
 
 
 function makeRows(m, n) {
@@ -144,8 +162,8 @@ function makeRows(m, n) {
     for (let i = 1; i <= m; i++) {
        row = "<th>"+hours[i]+"</th>";
        for (let j = 1; j <= n; j++) {
-          
-          row += "<td>"+getAllClasses(days[j],hours[i])+"</td>";
+          let s = "<span class=tip>"+getAllRooms(days[j],hours[i])+"</span>"
+          row += "<td>"+getAllClasses(days[j],hours[i])+s+"</td>";
        }
        text += "<tr>"+row+"</tr>";
     }
@@ -156,9 +174,11 @@ function makeRows(m, n) {
 
     title.innerText = document.title;
 	document.write("<h2> List Of Classes </h2>")
-   for (let a of Lessons){
-	document.write(a.name+"<br>")
-   }
+	
+	for (let ders of Lessons){
+			document.write(ders.name +"<br>")
+	}
+
    makeRows(4,5)
 </script>
 
