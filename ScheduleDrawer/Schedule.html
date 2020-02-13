@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+
+    <title>Schedule </title>
+
+  <style>
+    body { min-width: 500px; }
+    #sample { overflow-x: auto; }
+    table { border-collapse: collapse; }
+    th { color: blue; padding: 5px 5px; }
+    td { 
+        border: 1px solid blue; 
+        padding: 5px 5px; 
+        text-align: center; 
+        position: relative;
+    }
+    td:hover .tip {
+        visibility: visible;
+    }
+    td .tip {
+        visibility: hidden;
+        font-size: small;
+        background-color: blue;
+        color: white;
+        text-align: center;
+        padding: 5px 5px;
+        position: absolute;
+        left: 5px; 
+        top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+<center>
+<h2 id=title></h2>
+
+
+<table id="tablo"></table>
+
+
+</center>
+
+<script>
+"use strict";
+
+var dateStart = new Date("02/03/2020"); 
+var dateNow = new Date(); 
+  
+// To calculate the time difference of two dates 
+var Difference_In_Time = dateNow.getTime() - dateStart.getTime(); 
+  
+// To calculate the no. of days between two dates 
+var Difference_In_Days = Math.floor(Difference_In_Time / (1000 * 3600 * 24)); 
+ 
+var oddEvenCounter = (Math.floor(Difference_In_Days / 7 ) + 1) % 2 == 0 
+
+console.log(oddEvenCounter)
+
+
+
+
+
+
+
+
+let days =[null,"Monday","Tuesday","Wednesday","Thursday","Friday"]
+
+let hours = [null,"10:00 - 11:40","12:00 - 13:40","14:00 - 15:40","16:00 - 17:40" ]
+
+var Lessons =[]
+ class Lesson{
+ 
+	constructor(name){
+	this.name = name
+	this.days = [null]
+	this.hours = [null]
+	this.oddEven = [null] //even true odd false 
+	Lessons.push(this)
+	console.log(Lessons)
+	}
+	
+	addClass(day,hour,state){
+	this.days.push(day)
+	this.hours.push(hour)
+	this.oddEven.push(state)
+	}
+ }
+ 
+ let russian = new Lesson("Russian Language")
+ russian.addClass(days[1],hours[4],true)
+ russian.addClass(days[1],hours[4],false)
+ 
+ russian.addClass(days[5],hours[3],true)
+ russian.addClass(days[5],hours[3],false)
+ 
+ 
+let info = new Lesson("Information Systems Administration")
+info.addClass(days[3],hours[4],true)
+info.addClass(days[3],hours[4],false)
+
+info.addClass(days[4],hours[2],true)
+info.addClass(days[4],hours[2],false)
+
+let proj = new Lesson("Project Management")
+
+proj.addClass(days[4],hours[1],false)
+
+let knowledge = new Lesson("Knowledge Engineering and Knowledge Management")
+knowledge.addClass(days[4],hours[2],true)
+knowledge.addClass(days[4],hours[2],false)
+
+let research = new Lesson("Scientific and Research Work")
+let web = new Lesson ("WEB Service Using and Development")
+let software =new  Lesson("Software Engineering Tools")
+
+
+function getAllClasses(day,hour){
+let Str = ""
+
+for (let ders of Lessons){
+	for (let a = 1 ; a <= ders.days.length; a++){
+
+		if(ders.days[a] == day && ders.hours[a] == hour && ders.oddEven[a] == oddEvenCounter)
+			Str += ders.name + "<br>"
+	
+	
+	}
+}
+
+return Str
+}
+
+
+
+function makeRows(m, n) {
+    let row = "<th></th>";
+    for (let j = 1; j <= n; j++) 
+        row += "<th>"+days[j]+"</th>";
+    let text = "<tr>"+row+"</tr>";
+    for (let i = 1; i <= m; i++) {
+       row = "<th>"+hours[i]+"</th>";
+       for (let j = 1; j <= n; j++) {
+          
+          row += "<td>"+getAllClasses(days[j],hours[i])+"</td>";
+       }
+       text += "<tr>"+row+"</tr>";
+    }
+    let t = text.length+" chars";
+    console.log("makeRows: "+m+"x"+n+" "+t);
+    tablo.innerHTML = text; 
+}
+
+    title.innerText = document.title;
+	document.write("<h2> List Of Classes </h2>")
+   for (let a of Lessons){
+	document.write(a.name+"<br>")
+   }
+   makeRows(4,5)
+</script>
+
+</body>
+</html> 
