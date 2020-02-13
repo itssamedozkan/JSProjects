@@ -154,6 +154,21 @@ for (let ders of Lessons){
 return Str
 }
 
+function getAllDays(day,hour){
+let Str = ""
+
+for (let ders of Lessons){
+	for (let a = 1 ; a <= ders.days.length; a++){
+
+		if(ders.days[a] == day && ders.hours[a] == hour && ders.oddEven[a] == oddEvenCounter)
+			Str += ders.days[a] + "  "
+	
+	
+	}
+}
+
+return Str
+}
 
 
 function makeRows(m, n) {
@@ -177,8 +192,12 @@ function makeRows(m, n) {
     title.innerText = document.title;
 	document.write("<h2> List Of Classes </h2>")
 	
-	for (let ders of Lessons){
-			document.write(ders.name +"<br>")
+	for (let  i = 1 ; i <=4; i++){
+	for(let j = 1 ; j <=5 ; j++){
+	document.write(getAllClasses(days[j],hours[i]) + getAllDays(days[j],hours[i])+  getAllRooms(days[j],hours[i]))
+	
+	}
+	document.write("<hr>")
 	}
 
    makeRows(4,5)
