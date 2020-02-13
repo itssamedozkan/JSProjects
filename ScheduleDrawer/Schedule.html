@@ -164,7 +164,7 @@ function makeRows(m, n) {
     for (let i = 1; i <= m; i++) {
        row = "<th>"+hours[i]+"</th>";
        for (let j = 1; j <= n; j++) {
-          let s = "<span class=tip>"+getAllRooms(days[j],hours[i])+"</span>"
+          let s = "<span class=tip onclick=alert('hi')>"+getAllRooms(days[j],hours[i])+"</span>"
           row += "<td>"+getAllClasses(days[j],hours[i])+s+"</td>";
        }
        text += "<tr>"+row+"</tr>";
